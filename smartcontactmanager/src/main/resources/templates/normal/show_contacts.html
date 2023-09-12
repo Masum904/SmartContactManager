@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<section>
+
+<div class="card mr-3 ml-2">
+<div class="cord-body">
+
+<h1 class="text-center">Your Contacts</h1></div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Contact Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th> 
+      <th scope="col">Action</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="c:${contacts}">
+      <th th:text="'Ma2022'+${c.id}" scope="row">1</th>
+      <td th:text="${c.name}">Mark</td>
+      <td  ><a th:href="@{'/user/'+${c.id}+'/contact/'}"><span th:text="${c.email}"></span></a></td>
+      <td th:text="${c.phone}"></td>
+      <td>
+      <a href="#" th:onclick="|deleteContact(${c.id})|" class="btn btn-danger btn-sm">Delete</a>
+      
+      <form method="post" th:action="@{'/user/update-contact/'+${c.id}}">
+      <button class="btn btn-success btn-sm">Update</button>
+      </form>
+      </td>
+    </tr>
+    
+ 
+  </tbody>
+</table>
+<!-- pagination part -->
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item active">
+      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+
+
+</div>
+</section>
+</body>
+</html>
